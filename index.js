@@ -24,6 +24,13 @@ app.get('/scrape', async (req, res) => {
     res.send(scrapedJobs);
 });
 
+app.get('/search',async(req,res)=>{
+    const search = req.query.search.toLowerCase();
+    const scrapedJobs = await scrapData();
+    const searchResult = scrapedJobs.filter(job => job.jobTitle.toLowerCase().includes(search.toLowerCase()));
+    res.send(searchResult);
+})
+
 app.listen(3000, () => {
     console.log('Server is running at http://localhost:3000');
 });
