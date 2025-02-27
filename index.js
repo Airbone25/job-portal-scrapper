@@ -7,6 +7,7 @@ const app = express();
 
 mongoose.connect('mongodb+srv://keshavmehra2005:LeoMessi10@cluster0.zky0x.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
 const db = mongoose.connection;
+
 db.on('error', ()=>console.error('Error connecting to database'));
 db.once('open',()=>{
     console.log('Connected to database');
@@ -34,6 +35,12 @@ const options = [
         parentSelector: '.infoSection',
         titleSelector: '.jobTitle',
         companySelector: '.companyName > p'
+    },
+    {
+        url: 'https://internshala.com/jobs//',
+        parentSelector: '.company',
+        titleSelector: '.job-title-href',
+        companySelector: '.company-name'
     }
 ]
 
