@@ -60,8 +60,7 @@ app.get('/scrape', async (req, res) => {
 
 app.get('/search',async(req,res)=>{
     const search = req.query.search.toLowerCase();
-    const scrapedJobs = await scrapData();
-    const searchResult = scrapedJobs.filter(job => job.jobTitle.toLowerCase().includes(search.toLowerCase()));
+    const searchResult = await Job.find({jobTitle:{$regex:search,$options:'i'}});
     res.send(searchResult);
 })
 
