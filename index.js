@@ -1,3 +1,4 @@
+require('dotenv').config();
 const puppeteer = require('puppeteer');
 const cheerio = require('cheerio');
 const express = require('express');
@@ -5,7 +6,7 @@ const mongoose = require('mongoose');
 const Job = require('./models/Job');
 const app = express();
 
-mongoose.connect('mongodb+srv://keshavmehra2005:LeoMessi10@cluster0.zky0x.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
+mongoose.connect(process.env.DB_URI);
 const db = mongoose.connection;
 
 db.on('error', ()=>console.error('Error connecting to database'));
@@ -64,6 +65,6 @@ app.get('/search',async(req,res)=>{
     res.send(searchResult);
 })
 
-app.listen(3000, () => {
-    console.log('Server is running at http://localhost:3000');
+app.listen(3001, () => {
+    console.log('Server is running at http://localhost:3001');
 });
